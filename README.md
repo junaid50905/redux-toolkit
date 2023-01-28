@@ -26,3 +26,39 @@ Let’s start.
 Thankgod✌️ we only need two packages now , so go ahead and install these two.
 
 npm install --save react-redux @reduxjs/toolkit
+
+<h3>Step 2 – Create a global store</h3>
+<pre>
+ Create src/app/store.js –
+
+import { configureStore } from "@reduxjs/toolkit";
+
+export const store = configureStore({
+  reducer: {},
+});
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
