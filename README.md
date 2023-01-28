@@ -123,13 +123,14 @@ export const store = configureStore({
 <h3>Step 6 – Implementing useSelector and useDispatch in React Components</h3>
 Components/Counter.js
 
+here, the counter of useSelector == reducer counter of store
 <pre>
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { decrement, increment } from "../features/counter/counterSlice";
 
 export default function Counter() {
-  const count = useSelector((c) => c.counter.value);
+  const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
 
   return (
