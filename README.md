@@ -70,7 +70,7 @@ Provider wraps the App and the whole application has access to redux store.
 Now check your redux dev tool
 
 
-<h3><Step 4 – Now lets create a slice</h3>
+<h3>Step 4 – Now lets create a slice</h3>
 A function that accepts an initial state, an object of reducer functions, and a “slice name”, and automatically generates action creators and action types that correspond to the reducers and state.
 
 Internally, it uses createAction and createReducer, so you may also use Immer to write "mutating" immutable updates
@@ -157,13 +157,13 @@ export default function Counter() {
 Franly , redux is more of a flow wich you need to follow instead of trying hard to understand each and every logic .
 
 Lets revise all the steps again –
-<pre>
-Step 1 – Install the redux and react-redux package
-Step 2 – Create a store
-Step 3 – Providing store globally
-Step 4 – Creating slices (i.e reducers) , where all the major logics are performed
-Step 5 – Receiving action from UI (using useDispatch hook) and receiving data from global store to fronted (using useSelector hook).
- </pre>
+<ul>
+<li>Step 1 – Install the redux and react-redux package</li>
+<li>Step 2 – Create a store</li>
+<li>Step 3 – Providing store globally</li>
+<li>Step 4 – Creating slices (i.e reducers) , where all the major logics are performed</li>
+<li>Step 5 – Receiving action from UI (using useDispatch hook) and receiving data from global store to fronted (using useSelector hook).</li>
+ </ul>
 
 
 
