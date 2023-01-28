@@ -39,8 +39,9 @@ export const store = configureStore({
   reducer: {},
 });
 
-configureStore accepts a single object rather that multiple function arguments. It’s because under the hood, the store has been configured to allow using the Redux DevTools Extension and has had some Redux middleware included by default.
 </pre>
+
+configureStore accepts a single object rather that multiple function arguments. It’s because under the hood, the store has been configured to allow using the Redux DevTools Extension and has had some Redux middleware included by default.
 
 
 <h3>Step 3 – Providing store to complete react app</h3>
@@ -107,7 +108,61 @@ export default counterSlice.reducer;
 </pre>
 
 
+<h3>Step 5 – Add Slice Reducers to the Store</h3>
 
+<pre>
+import { configureStore } from "@reduxjs/toolkit";
+import counterRedcuer from "../features/counter/counterSlice";
+
+export const store = configureStore({
+  reducer: { counter: counterRedcuer },
+});
+
+</pre>
+
+<h3>Step 6 – Implementing useSelector and useDispatch in React Components</h3>
+Components/Counter.js
+
+<pre>
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { decrement, increment } from "../features/counter/counterSlice";
+
+export default function Counter() {
+  const count = useSelector((c) => c.counter.value);
+  const dispatch = useDispatch();
+
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          width: "40%",
+          alignItems: "center",
+        }}
+      >
+        <button onClick={() => dispatch(increment())}>Increment</button>
+        <span>{count}</span>
+        <button onClick={() => dispatch(decrement())}>Decrement</button>
+      </div>
+    </>
+  );
+}
+</pre>
+
+
+<h2>Conclusion</h2>
+Franly , redux is more of a flow wich you need to follow instead of trying hard to understand each and every logic .
+
+Lets revise all the steps again –
+
+Step 1 – Install the redux and react-redux package
+Step 2 – Create a store
+Step 3 – Providing store globally
+Step 4 – Creating slices (i.e reducers) , where all the major logics are performed
+Step 5 – Receiving action from UI (using useDispatch hook) and receiving data from global store to fronted (using useSelector hook).
 
 
 
