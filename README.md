@@ -23,8 +23,8 @@ Well to make interesting , we will learn redux toolkit along with making a simpl
 Let’s start.
 
 An Existing App
-------------------
-npm install @reduxjs/toolkit
+===============
+npm install @reduxjs/toolkit <br/>
 npm install react-redux
 
 
