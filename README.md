@@ -22,11 +22,6 @@ Well to make interesting , we will learn redux toolkit along with making a simpl
 
 Let’s start.
 
-An Existing App
-===============
-npm install @reduxjs/toolkit <br/>
-npm install react-redux
-
 
 <h3>Step 1 – Install Redux and Redux Toolkit package in an react app</h3>
 Thankgod✌️ we only need two packages now , so go ahead and install these two.
