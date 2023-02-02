@@ -154,7 +154,6 @@ export default function Counter() {
 }
 </pre>
 
-
 <h2>Conclusion</h2>
 Franly , redux is more of a flow wich you need to follow instead of trying hard to understand each and every logic .
 
