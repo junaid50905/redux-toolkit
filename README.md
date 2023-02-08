@@ -169,6 +169,194 @@ Lets revise all the steps again –
 
 
 
+- configureStore
+  - reducer
+- createSlice
+  - name
+  - initialState
+  - reducers
+    - reducer
+    - prepare
+- useDispatch and useSelector
+## 1
+
+### i.store.jsx
+```javascript
+import {
+    configureStore
+} from "@reduxjs/toolkit";
+
+import bookReducer from '../features/Book/BookSlice'
+
+export const store = configureStore({
+    reducer: {
+        book: bookReducer,
+    },
+});
+
+```
+### ii.main.jsx
+
+```javascript
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import './index.css'
+import { store } from "./app/store";
+import { Provider } from "react-redux";
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>
+  ,
+)
+
+```
+### iii.bookSlice.js
+```javascript
+
+import {createSlice} from "@reduxjs/toolkit";
+
+const initialState = {
+    booksList: []
+};
+
+export const bookSlice = createSlice({
+    name: "book",
+    initialState,
+    reducers: {
+        addBook: (state, action) => {
+            state.booksList.push(action.payload)
+        }
+    }
+});
+
+export const { addBook } = bookSlice.actions
+
+export default bookSlice.reducer;
+
+```
+### iv.BookList.jsx(ui)
+```javascript
+import { nanoid } from '@reduxjs/toolkit'
+import React,{useState} from 'react'
+import { useDispatch } from 'react-redux'
+import { addBook } from '../features/Book/BookSlice'
+
+const BookList = () => {
+    const [bookName, setBookName] = useState('')
+    const [bookAuthor, setBookAuthor] = useState('')
+    const [bookPrice, setBookPrice] = useState('')
+
+    const dispatch = useDispatch()
+
+    const submitHandler = (e)=>{
+        e.preventDefault()
+        dispatch(addBook({ id: nanoid(), name: bookName, author: bookAuthor, price: bookPrice, date: new Date()}))
+    }
+  return (
+    <div>
+      <form action="" onSubmit={submitHandler}>
+        <input type="text" onChange={(e)=> setBookName(e.target.value)} value={bookName} placeholder="book name"/>
+        <input type="text" onChange={(e)=> setBookAuthor(e.target.value)} value={bookAuthor} placeholder="book author"/>
+        <input type="text" onChange={(e)=> setBookPrice(e.target.value)} value={bookPrice} placeholder="book price"/>
+        <button type='submit'>add</button>
+      </form>
+    </div>
+  )
+}
+
+export default BookList
+
+```
+
+
+![Logo](https://i.ibb.co/DrNbf08/Screenshot-20230208-065219.png)
+
+
+## 2
+1 আমরা দেখেছি ui থেকে { id: nanoid (),: bookName, author: bookAuthor, price: bookPrice, date : new Date ()}) payload হিসেবে পাঠনো হয়েছে।  কিন্তু ui  থেকে কিন্তু আমরা name, author, price পাঠাচ্ছি।  তাই ইটা আমরা এই দুই নম্বর এক্সাম্পল দিয়ে সল্ভ করবো। 
+
+reducer  আর মাধ্যমে handle করবো ui থেকে যেটা পাঠনো হচ্ছে ,আর prepare এর মাধ্যমে handle করবো ui থেকে যেই data পাওয়া যায় না 
+
+
+- createSlice
+  - reducers
+    - reducer
+    - prepare
+
+### i. BookList.jsx(ui)
+```javascript
+import React,{useState} from 'react'
+import { useDispatch } from 'react-redux'
+import { addBook } from '../features/Book/BookSlice'
+
+const BookList = () => {
+    const [bookName, setBookName] = useState('')
+    const [bookAuthor, setBookAuthor] = useState('')
+    const [bookPrice, setBookPrice] = useState('')
+
+    const dispatch = useDispatch()
+
+    const submitHandler = (e)=>{
+        e.preventDefault()
+        dispatch(addBook({ name: bookName, author: bookAuthor, price: bookPrice}))
+    }
+  return (
+    <div>
+      <form action="" onSubmit={submitHandler}>
+        <input type="text" onChange={(e)=> setBookName(e.target.value)} value={bookName} placeholder="book name"/>
+        <input type="text" onChange={(e)=> setBookAuthor(e.target.value)} value={bookAuthor} placeholder="book author"/>
+        <input type="text" onChange={(e)=> setBookPrice(e.target.value)} value={bookPrice} placeholder="book price"/>
+        <button type='submit'>add</button>
+      </form>
+    </div>
+  )
+}
+
+export default BookList
+
+``` 
+
+### ii. bookSlice.js
+```javascript
+import {createSlice,nanoid} from "@reduxjs/toolkit";
+
+
+const initialState = {
+    booksList: []
+};
+
+export const bookSlice = createSlice({
+    name: "book",
+    initialState,
+    reducers: {
+        addBook: {
+            reducer: (state, action) => {
+                state.booksList.push(action.payload)
+            },
+            prepare: (value) => {
+                return {
+                    payload: {
+                        ...value,
+                        id: nanoid(),
+                        date: new Date()
+                    }
+                }
+            }
+        }
+    }
+});
+
+export const { addBook } = bookSlice.actions
+
+export default bookSlice.reducer;
+
+```
+
 
 
 
