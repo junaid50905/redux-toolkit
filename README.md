@@ -167,6 +167,8 @@ Lets revise all the steps again –
  </ul>
 
 
+## exmaples: 
+
 
 
 - configureStore
@@ -278,15 +280,10 @@ export default BookList
 
 
 ## 2
-1 আমরা দেখেছি ui থেকে { id: nanoid (),: bookName, author: bookAuthor, price: bookPrice, date : new Date ()}) payload হিসেবে পাঠনো হয়েছে।  কিন্তু ui  থেকে কিন্তু আমরা name, author, price পাঠাচ্ছি।  তাই ইটা আমরা এই দুই নম্বর এক্সাম্পল দিয়ে সল্ভ করবো। 
+1 এ  আমরা দেখেছি ui থেকে { id: nanoid (),: bookName, author: bookAuthor, price: bookPrice, date : new Date ()}) payload হিসেবে পাঠনো হয়েছে।  কিন্তু ui  থেকে কিন্তু আমরা name, author, price পাঠাচ্ছি।  তাই ইটা আমরা এই দুই নম্বর এক্সাম্পল দিয়ে সল্ভ করবো। 
 
 reducer  আর মাধ্যমে handle করবো ui থেকে যেটা পাঠনো হচ্ছে ,আর prepare এর মাধ্যমে handle করবো ui থেকে যেই data পাওয়া যায় না 
 
-
-- createSlice
-  - reducers
-    - reducer
-    - prepare
 
 ### i. BookList.jsx(ui)
 ```javascript
