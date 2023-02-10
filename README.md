@@ -357,6 +357,88 @@ export default bookSlice.reducer;
 
 
 
+## 3 createAsyncThunk
+---------
+#### postsSlice.js
+
+```javascript
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+export const getPosts = createAsyncThunk(
+    'posts/getPosts',
+    async() => {
+        return await fetch('https://jsonplaceholder.typicode.com/posts').then((res) => res.json())
+    }
+)
+
+const initialState = {
+    postsList: [],
+    isLoading: false,
+    error: ''
+}
+const postsSlice = createSlice({
+    name: 'posts',
+    initialState,
+    extraReducers: {
+        [getPosts.pending]: (state) => {
+            state.isLoading = true
+        },
+        [getPosts.fulfilled]: (state, action) => {
+            state.postsList = action.payload,
+                state.isLoading = false
+        },
+        [getPosts.rejected]: (state, action) => {
+            state.isLoading = false
+        },
+    }
+})
+
+
+export default postsSlice.reducer
+
+```
+
+#### store.js
+
+```javascript
+import {
+    configureStore
+} from "@reduxjs/toolkit";
+
+import bookReducer from '../features/Book/BookSlice'
+import postsReducer from '../features/products/productsSlice'
+
+export const store = configureStore({
+    reducer: {
+        book: bookReducer,
+        posts: postsReducer
+    }
+});
+```
+
+#### PostsList.jsx
+
+```javscript
+import React,{useEffect} from 'react'
+import { useDispatch } from 'react-redux'
+import { getPosts } from '../features/products/productsSlice'
+
+const PostsList = () => {
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        dispatch(getPosts())
+    },[dispatch])
+  return (
+    <div>
+      postslist
+    </div>
+  )
+}
+
+export default PostsList
+
+
+```
 
 
 
