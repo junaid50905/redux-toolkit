@@ -440,6 +440,9 @@ export default PostsList
 
 ```
 
+#### output preview
+
+![Logo](https://i.ibb.co/PFWXThR/Screenshot-20230210-101623.png)
 
 
 
